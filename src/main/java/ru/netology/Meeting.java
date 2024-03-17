@@ -1,6 +1,6 @@
 package ru.netology;
 
-public class Meeting extends Task{
+public class Meeting extends Task {
     protected String topic;
     protected String project;
     protected String start;
@@ -19,6 +19,7 @@ public class Meeting extends Task{
     public String getProject() {
         return project;
     }
+
     public String getStart() {
         return start;
     }
