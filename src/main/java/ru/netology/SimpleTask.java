@@ -1,6 +1,6 @@
 package ru.netology;
 
-public class SimpleTask xtends Task e{
+public class SimpleTask extends Task {
     protected String title;
 
     public SimpleTask(int id, String title) {
@@ -10,5 +10,12 @@ public class SimpleTask xtends Task e{
 
     public String getTitle() {
         return title;
+    }
+    @Override
+    public boolean matches(String query) {
+        if (title.contains(query)) {
+            return true;
+        }
+        return false;
     }
 }
