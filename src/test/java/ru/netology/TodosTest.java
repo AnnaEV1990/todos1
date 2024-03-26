@@ -65,6 +65,97 @@ public class TodosTest {
         Task[] actual = todos.search("Молоко");
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldGetId() {
+
+        String[] subtasks = {"провести собеседование", "организовать встречу", "согласовать график отпусков"};
+        Epic epic = new Epic(15, subtasks);
+        Task task = new Task(15);
+
+        int expected = epic.getId();
+        int actual = task.getId();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchInTodos() {
+        SimpleTask simpleTask = new SimpleTask(1, "Записаться к врачу");
+
+        String[] subtasks = {"провести собеседование", "организовать встречу", "согласовать график отпусков"};
+        Epic epic = new Epic(15, subtasks);
+
+        Meeting meeting = new Meeting(
+                18,
+                "Сделка ПФИ",
+                "Внедрение нового вида сделки",
+                "в 14:00 по НСК"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {simpleTask, epic, meeting};
+        Task[] actual = todos.search(" ");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchInSimpleTask() {
+        SimpleTask simpleTask = new SimpleTask(1, "Записаться к врачу");
+
+        String[] subtasks = {"провести собеседование", "организовать встречу", "согласовать график отпусков", "Закрыть задачу"};
+        Epic epic = new Epic(15, subtasks);
+
+        Meeting meeting = new Meeting(
+                18,
+                "Сделка ПФИ",
+                "Внедрение нового вида сделки",
+                "в 14:00 по НСК"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {simpleTask};
+        Task[] actual = todos.search("к врачу");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchInEpic() {
+        SimpleTask simpleTask = new SimpleTask(1, "Позвонить врачу");
+
+        String[] subtasks = {"провести собеседование", "организовать встречу", "согласовать график отпусков"};
+        Epic epic = new Epic(15, subtasks);
+
+        Meeting meeting = new Meeting(
+                18,
+                "Сделка ПФИ",
+                "Внедрение нового вида сделки",
+                "в 14:00 по НСК"
+        );
+
+        Todos todos = new Todos();
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {epic};
+        Task[] actual = todos.search("встречу");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
 
 

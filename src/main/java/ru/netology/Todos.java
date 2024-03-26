@@ -11,9 +11,12 @@ public class Todos {
      * @return Возвращает новый массив, который выглядит как тот, что мы передали,
      * но с добавлением нового элемента в конец
      */
+
     private Task[] addToArray(Task[] current, Task task) {
         Task[] tmp = new Task[current.length + 1];
-        System.arraycopy(current, 0, tmp, 0, current.length);
+        for (int i = 0; i < current.length; i++) {
+            tmp[i] = current[i];
+        }
         tmp[tmp.length - 1] = task;
         return tmp;
     }
@@ -23,6 +26,7 @@ public class Todos {
      *
      * @param task Добавляемая задача
      */
+
     public void add(Task task) { // <- вот здесь в параметре может лежать объект и вида SimpleTask, и вида Epic, и вида Meeting
         tasks = addToArray(tasks, task);
     }
@@ -30,6 +34,13 @@ public class Todos {
     public Task[] findAll() {
         return tasks;
     }
+
+    /**
+     * Метод поиска задач, которые подходят под поисковый запрос
+     *
+     * @param query Поисковый запрос
+     * @return Массив из подошедших задач
+     */
 
     public Task[] search(String query) {
         Task[] result = new Task[0]; // массив для ответа

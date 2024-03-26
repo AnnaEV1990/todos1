@@ -127,4 +127,34 @@ public class TaskTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void shouldFindQueryInTaskFalse() {
+        Task task = new Task(15);
+
+        boolean expected = false;
+        boolean actual = task.matches("звонок");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindQueryInEpicTrue() {
+        String[] subtasks = {"провести собеседование", "организовать встречу", "согласовать график отпусков"};
+        Task epic = new Epic(15, subtasks);
+
+        boolean expected = true;
+        boolean actual = epic.matches("встречу");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindQueryInSimpleTaskTrue() {
+        Task simpleTask = new SimpleTask(1, "Записаться к врачу");
+
+        boolean expected = true;
+        boolean actual = simpleTask.matches("Записать");
+
+        Assertions.assertEquals(expected, actual);
+    }
 }
